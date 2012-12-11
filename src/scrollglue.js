@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular, undefined){
     'use strict';
 
     angular.module('luegg.directives', [])
@@ -7,8 +7,11 @@
             priority: 1,
             scope: true,
             link: function(scope, $el, attrs){
-                var el = $el[0],
-                    autoScrollOn = true;
+                var el = $el[0];
+
+                if(attrs.scrollGlueOn === undefined){
+                    attrs.$set('scrollGlueOn', 'true');
+                }
 
                 function scrollToBottom(){
                     el.scrollTop = el.scrollHeight;
@@ -19,13 +22,13 @@
                 }
 
                 scope.$watch(function(){
-                    if(autoScrollOn){
+                    if(attrs.scrollGlueOn === 'true'){
                         scrollToBottom();
                     }
                 });
 
                 el.addEventListener('scroll', function(){
-                    autoScrollOn = shouldActivateAutoScroll();
+                    attrs.$set('scrollGlueOn', shouldActivateAutoScroll());
                 });
             }
         };

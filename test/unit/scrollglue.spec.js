@@ -3,7 +3,8 @@
 describe('the scroll glue directive', function(){
     var scope, $compile,
         templates = {
-            simple: '<div style="height: 40px; overflow-y: scroll" scroll-glue><div style="height: 100px">hi {{name}}</div></div>'
+            simple: '<div style="height: 40px; overflow-y: scroll" scroll-glue><div style="height: 100px">hi {{name}}</div></div>',
+            advanced: '<div style="height: 40px; overflow-y: scroll" scroll-glue scroll-glue-on="{{glued}}"><div style="height: 100px">hi {{name}}</div></div>',
         };
 
     beforeEach(module('luegg.directives'));
@@ -70,6 +71,33 @@ describe('the scroll glue directive', function(){
 
                 done();
             });
+        });
+    }));
+
+    it('should turn off when scroll-glue-on attribute is false', function(){
+        var $element = compile(templates.advanced),
+            element = $element[0];
+
+        scope.name = "World";
+        scope.glued = false;
+        scope.$digest();
+
+        expect(element.scrollTop).toBe(0);
+    });
+
+    it('should update the scroll glue attribute', async(function(done){
+        var $element = compile(templates.advanced),
+            element = $element[0];
+
+        scope.name = "World";
+        scope.glued = false;
+        scope.$digest();
+
+        element.scrollTop = element.scrollHeight;
+
+        setTimeout(function(){
+            expect($element.attr('scroll-glue-on')).toBe('true');
+            done();
         });
     }));
 });
