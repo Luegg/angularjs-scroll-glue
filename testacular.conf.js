@@ -10,6 +10,7 @@ basePath = '';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
+  'test/lib/*.js',
   'https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js',
   'https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.js',
   'https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-mocks.js',

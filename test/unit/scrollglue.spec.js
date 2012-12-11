@@ -8,7 +8,7 @@ describe('the scroll glue directive', function(){
 
     beforeEach(module('luegg.directives'));
 
-    beforeEach(inject(function($rootScope, _$compile_){
+    beforeEach(inject(function($rootScope, _$compile_, _$timeout_){
         scope = $rootScope;
         $compile = _$compile_;
     }));
@@ -30,4 +30,46 @@ describe('the scroll glue directive', function(){
 
         expect(element.scrollTop).toBe(element.scrollHeight - element.clientHeight);
     });
+
+    it('should turn off auto scroll after user scrolled manually', async(function(done){
+        var $element = compile(templates.simple),
+            element = $element[0];
+
+        scope.$digest();
+        element.scrollTop = 0;
+
+        setTimeout(function(){
+            scope.name = "World";
+            scope.$digest();
+
+            expect(element.scrollTop).toBe(0);
+
+            done();
+        }, 10);
+    }));
+
+    it('should turn on auto scroll after user scrolled manually to bottom of element', async(function(done){
+        var $element = compile(templates.simple),
+            element = $element[0];
+
+        scope.$digest();
+        element.scrollTop = 0;
+
+        setTimeout(function(){
+            scope.name = "World";
+            scope.$digest();
+
+            expect(element.scrollTop).toBe(0);
+
+            element.scrollTop = element.scrollHeight;
+            setTimeout(function(){
+                scope.name = "Foo";
+                scope.$digest();
+
+                expect(element.scrollTop).toBe(element.scrollHeight - element.clientHeight);
+
+                done();
+            });
+        });
+    }));
 });
