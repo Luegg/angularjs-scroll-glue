@@ -57,14 +57,11 @@ describe('the scroll glue directive', function(){
         element.scrollTop = 0;
 
         setTimeout(function(){
-            scope.name = "World";
             scope.$digest();
-
             expect(element.scrollTop).toBe(0);
 
             element.scrollTop = element.scrollHeight;
             setTimeout(function(){
-                scope.name = "Foo";
                 scope.$digest();
 
                 expect(element.scrollTop).toBe(element.scrollHeight - element.clientHeight);
@@ -78,7 +75,6 @@ describe('the scroll glue directive', function(){
         var $element = compile(templates.advanced),
             element = $element[0];
 
-        scope.name = "World";
         scope.glued = false;
         scope.$digest();
 
@@ -89,14 +85,13 @@ describe('the scroll glue directive', function(){
         var $element = compile(templates.advanced),
             element = $element[0];
 
-        scope.name = "World";
-        scope.glued = false;
+        scope.glued = 'true';
         scope.$digest();
 
-        element.scrollTop = element.scrollHeight;
+        element.scrollTop = 0;
 
         setTimeout(function(){
-            expect($element.attr('scroll-glue-on')).toBe('true');
+            expect($element.attr('scroll-glue-on')).toBe('false');
             done();
         });
     }));
