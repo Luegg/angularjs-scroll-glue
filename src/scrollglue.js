@@ -18,9 +18,7 @@
                 }
 
                 function shouldActivateAutoScroll(){
-                    return el.scrollTop + el.clientHeight == el.scrollHeight
-                        ? 'true'
-                        : 'false';
+                    return el.scrollTop + el.clientHeight == el.scrollHeight;
                 }
 
                 scope.$watch(function(){
@@ -30,7 +28,7 @@
                 });
 
                 el.addEventListener('scroll', function(){
-                    attrs.$set('scrollGlueOn', shouldActivateAutoScroll());
+                    attrs.$set('scrollGlueOn', shouldActivateAutoScroll().toString());
                 });
             }
         };
