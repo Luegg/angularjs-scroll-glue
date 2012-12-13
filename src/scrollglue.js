@@ -18,7 +18,9 @@
                 }
 
                 function shouldActivateAutoScroll(){
-                    return el.scrollTop + el.clientHeight == el.scrollHeight;
+                    return el.scrollTop + el.clientHeight == el.scrollHeight
+                        ? 'true'
+                        : 'false';
                 }
 
                 scope.$watch(function(){
