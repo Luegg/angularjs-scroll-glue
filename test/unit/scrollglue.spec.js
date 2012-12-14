@@ -4,7 +4,7 @@ describe('the scroll glue directive', function(){
     var scope, $compile,
         templates = {
             simple: '<div style="height: 40px; overflow-y: scroll" scroll-glue><div style="height: 100px">hi {{name}}</div></div>',
-            advanced: '<div style="height: 40px; overflow-y: scroll" scroll-glue ng-model="glued"><div style="height: 100px">hi {{name}}</div></div>',
+            withBinding: '<div style="height: 40px; overflow-y: scroll" scroll-glue ng-model="glued"><div style="height: 100px">hi {{name}}</div></div>',
         };
 
     beforeEach(module('luegg.directives'));
@@ -71,8 +71,8 @@ describe('the scroll glue directive', function(){
         });
     }));
 
-    it('should turn off when scroll-glue-on attribute is false', function(){
-        var $element = compile(templates.advanced),
+    it('should turn off when the bound value is false', function(){
+        var $element = compile(templates.withBinding),
             element = $element[0];
 
         scope.glued = false;
@@ -81,8 +81,8 @@ describe('the scroll glue directive', function(){
         expect(element.scrollTop).toBe(0);
     });
 
-    it('should update the scroll glue attribute', async(function(done){
-        var $element = compile(templates.advanced),
+    it('should update the bound value', async(function(done){
+        var $element = compile(templates.withBinding),
             element = $element[0];
 
         scope.glued = true;
@@ -91,7 +91,7 @@ describe('the scroll glue directive', function(){
         element.scrollTop = 0;
 
         setTimeout(function(){
-            expect($element.attr('scroll-glue-on')).toBe('false');
+            expect(scope.glued).toBe(false);
             done();
         });
     }));
