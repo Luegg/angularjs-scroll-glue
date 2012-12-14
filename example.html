@@ -4,6 +4,15 @@
   <head lang="en">
     <meta charset="utf-8">
     <title>AngularJS Scroll Glue Directive</title>
+
+    <style type="text/css">
+      [scroll-glue]{
+        height: 100px;
+        overflow-y: scroll;
+        border: 1px solid red;
+      }
+    </style>
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.js"></script>
     <script src="src/scrollglue.js"></script>
     
@@ -26,14 +35,14 @@
   
   <body ng-app="demo" ng-controller="ItemsCtrl">
     <h1>Simple</h1>
-    <div style="height: 100px; overflow-y: scroll" scroll-glue>
+    <div scroll-glue>
       <ul>
         <li ng-repeat="item in items">{{item}}</li>
       </ul>
     </div>
 
     <h1>With data binding</h1>
-    <div style="height: 100px; overflow-y: scroll" scroll-glue ng-model="glued">
+    <div scroll-glue ng-model="glued">
       <ul>
         <li ng-repeat="item in items">{{item}}</li>
       </ul>
