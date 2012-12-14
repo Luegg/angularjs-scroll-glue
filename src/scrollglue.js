@@ -1,17 +1,26 @@
 (function(angular, undefined){
     'use strict';
 
+    function fakeNgModel(initValue){
+        initValue = initValue !== undefined ? initValue : true;
+
+        return {
+            $setViewValue: function(value){
+                this.$viewValue = value;
+            },
+            $viewValue: initValue
+        };
+    }
+
     angular.module('luegg.directives', [])
     .directive('scrollGlue', function(){
         return {
             priority: 1,
-            scope: true,
-            link: function(scope, $el, attrs){
-                var el = $el[0];
-
-                if(attrs.scrollGlueOn === undefined){
-                    attrs.$set('scrollGlueOn', 'true');
-                }
+            require: ['?ngModel'],
+            restrict: 'A',
+            link: function(scope, $el, attrs, ctrls){
+                var el = $el[0],
+                    ngModel = ctrls[0] || fakeNgModel();
 
                 function scrollToBottom(){
                     el.scrollTop = el.scrollHeight;
@@ -22,13 +31,14 @@
                 }
 
                 scope.$watch(function(){
-                    if(attrs.scrollGlueOn === 'true'){
+                    if(ngModel.$viewValue){
                         scrollToBottom();
                     }
                 });
 
-                el.addEventListener('scroll', function(){
-                    attrs.$set('scrollGlueOn', shouldActivateAutoScroll().toString());
+                $el.bind('scroll', function(){
+                    ngModel.$setViewValue(shouldActivateAutoScroll());
+                    scope.$digest();
                 });
             }
         };

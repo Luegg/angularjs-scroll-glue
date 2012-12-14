@@ -4,7 +4,7 @@ describe('the scroll glue directive', function(){
     var scope, $compile,
         templates = {
             simple: '<div style="height: 40px; overflow-y: scroll" scroll-glue><div style="height: 100px">hi {{name}}</div></div>',
-            advanced: '<div style="height: 40px; overflow-y: scroll" scroll-glue scroll-glue-on="{{glued}}"><div style="height: 100px">hi {{name}}</div></div>',
+            advanced: '<div style="height: 40px; overflow-y: scroll" scroll-glue ng-model="glued"><div style="height: 100px">hi {{name}}</div></div>',
         };
 
     beforeEach(module('luegg.directives'));
@@ -85,7 +85,7 @@ describe('the scroll glue directive', function(){
         var $element = compile(templates.advanced),
             element = $element[0];
 
-        scope.glued = 'true';
+        scope.glued = true;
         scope.$digest();
 
         element.scrollTop = 0;
