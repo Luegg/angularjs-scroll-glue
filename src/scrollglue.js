@@ -2,8 +2,6 @@
     'use strict';
 
     function fakeNgModel(initValue){
-        initValue = initValue !== undefined ? initValue : true;
-
         return {
             $setViewValue: function(value){
                 this.$viewValue = value;
@@ -20,7 +18,7 @@
             restrict: 'A',
             link: function(scope, $el, attrs, ctrls){
                 var el = $el[0],
-                    ngModel = ctrls[0] || fakeNgModel();
+                    ngModel = ctrls[0] || fakeNgModel(true);
 
                 function scrollToBottom(){
                     el.scrollTop = el.scrollHeight;
@@ -37,8 +35,7 @@
                 });
 
                 $el.bind('scroll', function(){
-                    ngModel.$setViewValue(shouldActivateAutoScroll());
-                    scope.$digest();
+                    scope.$apply(ngModel.$setViewValue.bind(ngModel, shouldActivateAutoScroll()));
                 });
             }
         };
