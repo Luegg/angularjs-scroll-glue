@@ -1,13 +1,15 @@
 {
-    "author": "Lukas Wegmann",
-    "name": "angularjs-scroll-glue",
-    "version": "1.0.0",
-    "dependencies": {
-    },
-    "devDependencies": {
-        "testacular": ">= 0.4.0"
-    },
-    "scripts": {
-        "test": "testacular start test/testacular.conf.js --single-run --browsers PhantomJS"
-    }
+  "author": "Lukas Wegmann",
+  "name": "angularjs-scroll-glue",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "karma": "~0.12.0",
+    "karma-jasmine": "~0.1.0",
+    "karma-firefox-launcher": "~0.1.3",
+    "karma-phantomjs-launcher": "~0.1.4"
+  },
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start --single-run"
+  }
 }
