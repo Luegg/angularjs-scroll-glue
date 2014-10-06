@@ -13,7 +13,7 @@
       }
     </style>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
     <script src="src/scrollglue.js"></script>
     
     <script>
@@ -42,7 +42,7 @@
     </div>
 
     <h1>With data binding</h1>
-    <div scroll-glue ng-model="glued">
+    <div scroll-glue="glued">
       <ul>
         <li ng-repeat="item in items">{{item}}</li>
       </ul>

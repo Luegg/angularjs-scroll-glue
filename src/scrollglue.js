@@ -1,24 +1,20 @@
 (function(angular, undefined){
     'use strict';
 
-    function fakeNgModel(initValue){
-        return {
-            $setViewValue: function(value){
-                this.$viewValue = value;
-            },
-            $viewValue: initValue
-        };
-    }
-
     angular.module('luegg.directives', [])
     .directive('scrollGlue', function(){
         return {
             priority: 1,
-            require: ['?ngModel'],
             restrict: 'A',
-            link: function(scope, $el, attrs, ctrls){
-                var el = $el[0],
-                    ngModel = ctrls[0] || fakeNgModel(true);
+            scope: {
+                scrollGlue: "=?"
+            },
+            link: function(scope, $el){
+                var el = $el[0];
+
+                if(scope.scrollGlue === undefined){
+                    scope.scrollGlue = true;
+                }
 
                 function scrollToBottom(){
                     el.scrollTop = el.scrollHeight;
@@ -30,15 +26,15 @@
                 }
 
                 scope.$watch(function(){
-                    if(ngModel.$viewValue){
+                    if(scope.scrollGlue){
                         scrollToBottom();
                     }
                 });
 
                 $el.bind('scroll', function(){
                     var activate = shouldActivateAutoScroll();
-                    if(activate !== ngModel.$viewValue){
-                        scope.$apply(ngModel.$setViewValue.bind(ngModel, activate));
+                    if(activate !== scope.scrollGlue){
+                        scope.$apply(function(){ scope.scrollGlue = activate; });
                     }
                 });
             }
