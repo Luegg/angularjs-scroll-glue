@@ -17,8 +17,8 @@ module.exports = function(config) {
     files: [
       'test/lib/*.js',
       'https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js',
-      'https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.js',
-      'https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-mocks.js',
+      'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js',
+      'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-mocks.js',
       'src/*.js',
       'test/unit/*.spec.js'
     ],
