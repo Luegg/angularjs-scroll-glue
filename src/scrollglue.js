@@ -6,15 +6,17 @@
         return {
             priority: 1,
             restrict: 'A',
-            scope: {
-                scrollGlue: "=?"
-            },
-            link: function(scope, $el){
+            scope: false,
+            link: function(scope, $el, attrs){
                 var el = $el[0];
 
-                if(scope.scrollGlue === undefined){
-                    scope.scrollGlue = true;
-                }
+                scope.$watch(attrs.scrollGlue, function(value) {
+                  if(value === undefined) {
+                    value = true;
+                  }
+
+                  scope.scrollGlue = value;
+                });
 
                 function scrollToBottom(){
                     el.scrollTop = el.scrollHeight;
@@ -34,7 +36,10 @@
                 $el.bind('scroll', function(){
                     var activate = shouldActivateAutoScroll();
                     if(activate !== scope.scrollGlue){
-                        scope.$apply(function(){ scope.scrollGlue = activate; });
+                        scope.$apply(function(){
+                          scope[attrs.scrollGlue] = activate;
+                          scope.scrollGlue = activate;
+                        });
                     }
                 });
             }
