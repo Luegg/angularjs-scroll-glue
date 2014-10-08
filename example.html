@@ -35,24 +35,34 @@
   
   <body ng-app="demo" ng-controller="ItemsCtrl">
     <h1>Simple</h1>
+    <p>To activate the scroll glue on an element just add the scroll-glue attribute.
+      <pre>&lt;div scroll-glue/&gt;</pre></p>
     <div scroll-glue>
       <ul>
         <li ng-repeat="item in items">{{item}}</li>
       </ul>
     </div>
 
-    <h1>With data binding</h1>
+    <h1>With two-way data binding</h1>
+    <p>If you pass a scope variable to the attribute, scroll-glue updates the variable to true when the glue is attached or to false if the glue is released and activates/deactivates the glue according to the variables value.
+      <pre>&lt;div scroll-glue="glued"/&gt;</pre></p>
     <div scroll-glue="glued">
       <ul>
         <li ng-repeat="item in items">{{item}}</li>
       </ul>
     </div>
-    <a ng-click="glued = !glued">Toggle scroll-glue ({{glued}})</a>
-    <ol>
-      <li>Watch the element scrolling</li>
-      <li>Scroll up to release the glue</li>
-      <li>Scroll to bottom to attach the glue again</li>
-    </ol>
+    <p><button ng-click="glued = !glued">Toggle glued ({{glued}})</button></p>
+
+    <h1>With one-way data binding</h1>
+    <p>If you pass an expression that is not a scope variable, the scroll-glue is bound to the result of this expression.
+      <pre>&lt;div scroll-glue="!glued"/&gt;</pre></p>
+    <div scroll-glue="!glued">
+      <ul>
+        <li ng-repeat="item in items">{{item}}</li>
+      </ul>
+    </div>
+    <p>If you want to force one way-binding on a scope variable use double negation:
+      <pre>&lt;div scroll-glue="!!glued"/&gt;</pre></p>
   </body>
   
 </html>

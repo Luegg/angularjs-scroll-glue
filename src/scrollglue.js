@@ -3,21 +3,69 @@
 
     angular.module('luegg.directives', [])
     .directive('scrollGlue', function(){
+        function unboundState(initValue){
+            var activated = initValue;
+            return {
+                getValue: function(){
+                    return activated;
+                },
+                setValue: function(value){
+                    activated = value;
+                }
+            };
+        }
+
+        function oneWayBindingState(attr, scope){
+            return {
+                getValue: function(){
+                    return scope.$eval(attr);
+                },
+                setValue: function(){}
+            }
+        }
+
+        function twoWayBindingState(attr, scope){
+            return {
+                getValue: function(){
+                    return scope[attr];
+                },
+                setValue: function(value){
+                    if(value !== scope[attr]){
+                        scope.$apply(function(){
+                            scope[attr] = value;
+                        });
+                    }
+                }
+            };
+        }
+
+        function createActivationState(attr, scope){
+            if(attr !== ""){
+                if(scope[attr] !== undefined){
+                    return twoWayBindingState(attr, scope);
+                } else {
+                    return oneWayBindingState(attr, scope);
+                }
+            } else {
+                return unboundState(true);
+            }
+        }
+
         return {
             priority: 1,
             restrict: 'A',
-            scope: {
-                scrollGlue: "=?"
-            },
-            link: function(scope, $el){
-                var el = $el[0];
-
-                if(scope.scrollGlue === undefined){
-                    scope.scrollGlue = true;
-                }
+            link: function(scope, $el, attrs){
+                var el = $el[0],
+                    activationState = createActivationState(attrs.scrollGlue, scope);
 
                 function scrollToBottom(){
                     el.scrollTop = el.scrollHeight;
+                }
+
+                function onScopeChanges(scope){
+                    if(activationState.getValue()){
+                        scrollToBottom();
+                    }
                 }
 
                 function shouldActivateAutoScroll(){
@@ -25,18 +73,12 @@
                     return el.scrollTop + el.clientHeight + 1 >= el.scrollHeight;
                 }
 
-                scope.$watch(function(){
-                    if(scope.scrollGlue){
-                        scrollToBottom();
-                    }
-                });
+                function onScroll(){
+                    activationState.setValue(shouldActivateAutoScroll());
+                }
 
-                $el.bind('scroll', function(){
-                    var activate = shouldActivateAutoScroll();
-                    if(activate !== scope.scrollGlue){
-                        scope.$apply(function(){ scope.scrollGlue = activate; });
-                    }
-                });
+                scope.$watch(onScopeChanges);
+                $el.bind('scroll', onScroll);
             }
         };
     });

@@ -4,6 +4,7 @@ describe('the scroll glue directive', function(){
     var scope, $compile,
         templates = {
             simple: '<div style="height: 40px; overflow-y: scroll" scroll-glue><div style="height: 100px">hi {{name}}</div></div>',
+            deactivated: '<div style="height: 40px; overflow-y: scroll" scroll-glue="false"><div style="height: 100px">hi {{name}}</div></div>',
             withBinding: '<div style="height: 40px; overflow-y: scroll" scroll-glue="glued"><div style="height: 100px">hi {{name}}</div></div>',
         };
 
@@ -30,6 +31,16 @@ describe('the scroll glue directive', function(){
         scope.$digest();
 
         expect(element.scrollTop).toBe(element.scrollHeight - element.clientHeight);
+    });
+
+    it('should be deactivated if the scrollGlue attribute is set to "false"', function(){
+        var $element = compile(templates.deactivated),
+            element = $element[0];
+
+        scope.name = "World";
+        scope.$digest();
+
+        expect(element.scrollTop).toBe(0);
     });
 
     it('should turn off auto scroll after user scrolled manually', async(function(done){
@@ -72,6 +83,8 @@ describe('the scroll glue directive', function(){
     }));
 
     it('should turn off when the bound value is false', function(){
+        scope.glued = true;
+
         var $element = compile(templates.withBinding),
             element = $element[0];
 
@@ -82,10 +95,11 @@ describe('the scroll glue directive', function(){
     });
 
     it('should update the bound value', async(function(done){
+        scope.glued = true;
+
         var $element = compile(templates.withBinding),
             element = $element[0];
 
-        scope.glued = true;
         scope.$digest();
 
         element.scrollTop = 0;
