@@ -6,6 +6,7 @@ describe('the scroll glue directive', function(){
             simple: '<div style="height: 40px; overflow-y: scroll" scroll-glue><div style="height: 100px">hi {{name}}</div></div>',
             deactivated: '<div style="height: 40px; overflow-y: scroll" scroll-glue="false"><div style="height: 100px">hi {{name}}</div></div>',
             withBinding: '<div style="height: 40px; overflow-y: scroll" scroll-glue="glued"><div style="height: 100px">hi {{name}}</div></div>',
+            withSubPropertyBinding: '<div style="height: 40px; overflow-y: scroll" scroll-glue="prop.glued"><div style="height: 100px">hi {{name}}</div></div>',
         };
 
     beforeEach(module('luegg.directives'));
@@ -106,6 +107,24 @@ describe('the scroll glue directive', function(){
 
         setTimeout(function(){
             expect(scope.glued).toBe(false);
+            done();
+        });
+    }));
+
+    it('should update the bound value in sub properties', async(function(done){
+        scope.prop = {
+            glued: true
+        };
+
+        var $element = compile(templates.withSubPropertyBinding),
+            element = $element[0];
+
+        scope.$digest();
+
+        element.scrollTop = 0;
+
+        setTimeout(function(){
+            expect(scope.prop.glued).toBe(false);
             done();
         });
     }));

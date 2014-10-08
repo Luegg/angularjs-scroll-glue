@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('luegg.directives', [])
-    .directive('scrollGlue', function(){
+    .directive('scrollGlue', function($parse){
         function unboundState(initValue){
             var activated = initValue;
             return {
@@ -15,24 +15,24 @@
             };
         }
 
-        function oneWayBindingState(attr, scope){
+        function oneWayBindingState(getter, scope){
             return {
                 getValue: function(){
-                    return scope.$eval(attr);
+                    return getter(scope);
                 },
                 setValue: function(){}
             }
         }
 
-        function twoWayBindingState(attr, scope){
+        function twoWayBindingState(getter, setter, scope){
             return {
                 getValue: function(){
-                    return scope[attr];
+                    return getter(scope);
                 },
                 setValue: function(value){
-                    if(value !== scope[attr]){
+                    if(value !== getter(scope)){
                         scope.$apply(function(){
-                            scope[attr] = value;
+                            setter(scope, value);
                         });
                     }
                 }
@@ -41,10 +41,11 @@
 
         function createActivationState(attr, scope){
             if(attr !== ""){
-                if(scope[attr] !== undefined){
-                    return twoWayBindingState(attr, scope);
+                var getter = $parse(attr);
+                if(getter.assign !== undefined){
+                    return twoWayBindingState(getter, getter.assign, scope);
                 } else {
-                    return oneWayBindingState(attr, scope);
+                    return oneWayBindingState(getter, scope);
                 }
             } else {
                 return unboundState(true);
