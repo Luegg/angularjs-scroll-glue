@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('luegg.directives', [])
-    .directive('scrollGlue', function($parse){
+    .directive('scrollGlue', ['$parse', function($parse){
         function unboundState(initValue){
             var activated = initValue;
             return {
@@ -82,5 +82,5 @@
                 $el.bind('scroll', onScroll);
             }
         };
-    });
+    }]);
 }(angular));
