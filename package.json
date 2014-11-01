@@ -2,6 +2,7 @@
   "author": "Lukas Wegmann",
   "name": "angularjs-scroll-glue",
   "version": "2.0.3",
+  "main" :  "src/scrollglue.js",
   "dependencies": {},
   "devDependencies": {
     "karma": "~0.12.0",
