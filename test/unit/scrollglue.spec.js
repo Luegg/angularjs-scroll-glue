@@ -4,6 +4,7 @@ describe('the scroll glue directive', function(){
     var scope, $compile,
         templates = {
             simple: '<div style="height: 40px; overflow-y: scroll" scroll-glue><div style="height: 100px">hi {{name}}</div></div>',
+            always: '<div style="height: 40px; overflow-y: scroll" scroll-glue always-scroll="true"><div style="height: 100px">hi {{name}}</div></div>',
             deactivated: '<div style="height: 40px; overflow-y: scroll" scroll-glue="false"><div style="height: 100px">hi {{name}}</div></div>',
             withBinding: '<div style="height: 40px; overflow-y: scroll" scroll-glue="glued"><div style="height: 100px">hi {{name}}</div></div>',
             withSubPropertyBinding: '<div style="height: 40px; overflow-y: scroll" scroll-glue="prop.glued"><div style="height: 100px">hi {{name}}</div></div>',
@@ -43,6 +44,23 @@ describe('the scroll glue directive', function(){
 
         expect(element.scrollTop).toBe(0);
     });
+
+    it('should always auto scroll if scrollGlue attribute is set to "always"', async(function(done){
+        var $element = compile(templates.always),
+            element = $element[0];
+
+        scope.$digest();
+        element.scrollTop = 0;
+
+        setTimeout(function(){
+            scope.name = "World";
+            scope.$digest();
+
+            expect(element.scrollTop).toBe(element.scrollHeight - element.clientHeight);
+
+            done();
+        }, 10)
+    }));
 
     it('should turn off auto scroll after user scrolled manually', async(function(done){
         var $element = compile(templates.simple),

@@ -20,7 +20,7 @@
       angular.module('demo', ['luegg.directives']);
     
       function ItemsCtrl($scope, $timeout){
-        $scope.items = ['1', '2', '3'];
+        $scope.items = ['1', '2', '3', '4'];
         $scope.glued = true;
         
         function addItem(){
@@ -38,6 +38,15 @@
     <p>To activate the scroll glue on an element just add the scroll-glue attribute.
       <pre>&lt;div scroll-glue/&gt;</pre></p>
     <div scroll-glue>
+      <ul>
+        <li ng-repeat="item in items">{{item}}</li>
+      </ul>
+    </div>
+
+    <h1>Simple (always scroll)</h1>
+    <p>If you want the view to scroll to the bottom even if the user has manually scrolled, add always-scroll="true" to your element.</p>
+      <pre>&lt;div scroll-glue always-scroll="true"/&gt;</pre></p>
+    <div scroll-glue always-scroll="true">
       <ul>
         <li ng-repeat="item in items">{{item}}</li>
       </ul>
