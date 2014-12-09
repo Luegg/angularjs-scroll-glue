@@ -3,7 +3,7 @@
 An AngularJs directive that automatically scrolls to the bottom of an element on changes in its scope.
 
 ## Example
-[Demo Plunk](http://plnkr.co/edit/wxTyp7PpyxJOHSlUumVC?p=preview)
+[Demo Plunk](http://plnkr.co/edit/y4KrXOvGBph1EbIHl6eQ?p=preview)
 
 ## License (MIT)
 
