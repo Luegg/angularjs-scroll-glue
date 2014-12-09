@@ -64,7 +64,7 @@
                 }
 
                 function onScopeChanges(scope){
-                    if(activationState.getValue()){
+                    if(activationState.getValue() && !shouldActivateAutoScroll()){
                         scrollToBottom();
                     }
                 }
