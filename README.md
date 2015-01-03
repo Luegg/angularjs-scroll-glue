@@ -5,7 +5,7 @@ An AngularJs directive that automatically scrolls to the bottom of an element on
 ## Install
 #### Bower
 ```bash
-$ bower install angularjs-scroll-glue --save
+$ bower install angular-scroll-glue --save
 ```
 
 ## Usage
