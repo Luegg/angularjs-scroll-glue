@@ -78,8 +78,22 @@
                     activationState.setValue(shouldActivateAutoScroll());
                 }
 
+                function shouldActivateAutoScrollForWindow(){
+                    var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+                    return (scrollTop + window.innerHeight) >= document.body.scrollHeight;
+                }
+
+                function onScrollWindow() {
+                    activationState.setValue(shouldActivateAutoScrollForWindow());
+                }
+
                 scope.$watch(onScopeChanges);
-                $el.bind('scroll', onScroll);
+                
+                if(el.constructor.name === HTMLBodyElement.name) {
+                    window.onscroll = onScrollWindow;
+                } else {
+                    el.bind('scroll', onScroll);
+                }
             }
         };
     }]);
