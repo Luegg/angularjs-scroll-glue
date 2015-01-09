@@ -55,6 +55,9 @@
         return {
             priority: 1,
             restrict: 'A',
+            scope: {
+                horizontal: '=horizontal'
+            },
             link: function(scope, $el, attrs){
                 var el = $el[0],
                     activationState = createActivationState(attrs.scrollGlue, scope);
@@ -62,10 +65,19 @@
                 function scrollToBottom(){
                     el.scrollTop = el.scrollHeight;
                 }
+                
+                function scrollToRight(){
+                    el.scrollLeft = el.scrollWidth;
+                }
 
                 function onScopeChanges(scope){
                     if(activationState.getValue() && !shouldActivateAutoScroll()){
-                        scrollToBottom();
+                        if(scope.horizontal == true) {
+                            scrollToRight();
+                        }
+                        else{
+                            scrollToBottom();                            
+                        }
                     }
                 }
 
