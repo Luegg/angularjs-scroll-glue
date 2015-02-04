@@ -1,6 +1,6 @@
+
 (function(angular, undefined){
     'use strict';
-
     angular.module('luegg.directives', [])
     .directive('scrollGlue', ['$parse', function($parse){
         function unboundState(initValue){
@@ -40,6 +40,7 @@
         }
 
         function createActivationState(attr, scope){
+          console.log(attr !== "")
             if(attr !== ""){
                 var getter = $parse(attr);
                 if(getter.assign !== undefined){
@@ -58,20 +59,32 @@
             link: function(scope, $el, attrs){
                 var el = $el[0],
                     activationState = createActivationState(attrs.scrollGlue, scope);
-
+                var scrollParent = false;
                 function scrollToBottom(){
+                  if (scrollParent) {
+                    var height = el.parentElement.scrollHeight - window.innerHeight;
+                    el.parentElement.scrollTop = height;
+                  } else {
                     el.scrollTop = el.scrollHeight;
+                  }
                 }
 
                 function onScopeChanges(scope){
-                    if(activationState.getValue() && !shouldActivateAutoScroll()){
+                    if(activationState.getValue() && shouldActivateAutoScroll()){
                         scrollToBottom();
                     }
                 }
 
                 function shouldActivateAutoScroll(){
                     // + 1 catches off by one errors in chrome
-                    return el.scrollTop + el.clientHeight + 1 >= el.scrollHeight;
+                    var result = el.scrollTop + el.offsetHeight + 1 <= el.scrollHeight;
+                    if (!result) {
+                      result = (el.parentElement.scrollHeight - window.innerHeight) !== 0;
+                      scrollParent = true;
+                    } else {
+                      scrollParent = false;
+                    }
+                    return result;
                 }
 
                 function onScroll(){
