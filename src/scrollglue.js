@@ -40,7 +40,6 @@
         }
 
         function createActivationState(attr, scope){
-          console.log(attr !== "")
             if(attr !== ""){
                 var getter = $parse(attr);
                 if(getter.assign !== undefined){
@@ -60,10 +59,14 @@
                 var el = $el[0],
                     activationState = createActivationState(attrs.scrollGlue, scope);
                 var scrollParent = false;
+                var height = 0;
                 function scrollToBottom(){
                   if (scrollParent) {
-                    var height = el.parentElement.scrollHeight - window.innerHeight;
-                    el.parentElement.scrollTop = height;
+                    if (el.parentElement.scrollHeight > 0) {
+                      el.parentElement.scrollTop = height;
+                    } else {
+                      document.body.scrollTop = height;
+                    }
                   } else {
                     el.scrollTop = el.scrollHeight;
                   }
@@ -79,7 +82,12 @@
                     // + 1 catches off by one errors in chrome
                     var result = el.scrollTop + el.offsetHeight + 1 <= el.scrollHeight;
                     if (!result) {
-                      result = (el.parentElement.scrollHeight - window.innerHeight) !== 0;
+                      var scrollHeight = el.parentElement.scrollHeight;
+                      if (scrollHeight === 0) {
+                        scrollHeight = document.body.scrollHeight;
+                      }
+                      height = scrollHeight - window.innerHeight;
+                      result = height !== 0;
                       scrollParent = true;
                     } else {
                       scrollParent = false;
