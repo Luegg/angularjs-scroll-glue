@@ -6,10 +6,18 @@
     <title>AngularJS Scroll Glue Directive</title>
 
     <style type="text/css">
+      [scroll-glue-top],
       [scroll-glue]{
         height: 100px;
         overflow-y: scroll;
         border: 1px solid red;
+      }
+
+      [scroll-glue-right]{
+        width: 600px;
+        overflow-x: scroll;
+        border: 1px solid red;
+        padding: 10px;
       }
     </style>
 
@@ -63,6 +71,21 @@
     </div>
     <p>If you want to force one way-binding on a scope variable use double negation:
       <pre>&lt;div scroll-glue="!!glued"/&gt;</pre></p>
+
+    <h1>Scroll Direction</h1>
+    <p>You can also specify the scroll direction by combining the following directives:
+      <pre>&lt;div scroll-glue-top="glued"/&gt;</pre>
+      <div scroll-glue-top="glued">
+        <ul>
+          <li ng-repeat="item in items.slice().reverse()">{{item}}</li>
+        </ul>
+      </div>
+      <pre>&lt;div scroll-glue-bottom="glued"/&gt;</pre>
+      <pre>&lt;div scroll-glue-left="glued"/&gt;</pre>
+      <pre>&lt;div scroll-glue-right="glued"/&gt;</pre>
+      <div scroll-glue-right="glued">
+        <span ng-repeat="item in items" style="border: 1px solid black">{{item}}</span>
+      </div></p>
   </body>
   
 </html>

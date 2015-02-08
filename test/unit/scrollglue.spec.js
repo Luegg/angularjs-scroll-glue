@@ -7,6 +7,7 @@ describe('the scroll glue directive', function(){
             deactivated: '<div style="height: 40px; overflow-y: scroll" scroll-glue="false"><div style="height: 100px">hi {{name}}</div></div>',
             withBinding: '<div style="height: 40px; overflow-y: scroll" scroll-glue="glued"><div style="height: 100px">hi {{name}}</div></div>',
             withSubPropertyBinding: '<div style="height: 40px; overflow-y: scroll" scroll-glue="prop.glued"><div style="height: 100px">hi {{name}}</div></div>',
+            withBindingTop: '<div style="height: 40px; overflow-y: scroll" scroll-glue="glued"><div style="height: 100px">hi {{name}}</div></div>',
         };
 
     beforeEach(module('luegg.directives'));
@@ -128,4 +129,16 @@ describe('the scroll glue directive', function(){
             done();
         });
     }));
+
+    it('should scroll to top when using scroll-glue-top', function(){
+        var $element = compile(templates.withBindingTop),
+            element = $element[0];
+
+        element.scrollTop = 100;
+
+        scope.name = "World";
+        scope.$digest();
+
+        expect(element.scrollTop).toBe(element.scrollHeight - element.clientHeight);
+    });
 });
