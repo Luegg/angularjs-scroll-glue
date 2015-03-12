@@ -3,9 +3,14 @@
 An AngularJs directive that automatically scrolls to the bottom of an element on changes in its scope.
 
 ## Install
-#### Bower
+### Bower
 ```bash
 $ bower install angular-scroll-glue --save
+```
+
+### NPM
+```bash
+$ npm i angularjs-scroll-glue
 ```
 
 ## Usage
