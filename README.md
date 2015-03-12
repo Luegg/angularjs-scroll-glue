@@ -1,8 +1,35 @@
-# angularjs-scroll-glue [![Build Status](https://travis-ci.org/Luegg/angularjs-scroll-glue.svg?branch=master)](https://travis-ci.org/Luegg/angularjs-scroll-glue)
+# angular-scroll-glue [![Build Status](https://travis-ci.org/Luegg/angularjs-scroll-glue.svg?branch=master)](https://travis-ci.org/Luegg/angularjs-scroll-glue)
 
 An AngularJs directive that automatically scrolls to the bottom of an element on changes in its scope.
 
-## Example
+## Install
+#### Bower
+```bash
+$ bower install angular-scroll-glue --save
+```
+
+## Usage
+```javascript
+// Add `luegg.directives` to your module's dependencies.
+angular.module('yourModule', [
+	...,
+	'luegg.directives'
+]);
+```
+
+```html
+<div scroll-glue>
+	<!-- Content here will be "scroll-glued". -->
+</div>
+
+<div scroll-glue="glued">
+	<!-- Content here will be "scroll-glued" if the passed expression is truthy. -->
+</div>
+```
+
+**More information can be found in the [live demo](#live-demo).**
+
+## Live demo
 [Demo Plunk](http://plnkr.co/edit/wxTyp7PpyxJOHSlUumVC?p=preview)
 
 ## License (MIT)
