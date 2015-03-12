@@ -3,6 +3,12 @@
   "name": "angularjs-scroll-glue",
   "version": "2.0.4",
   "main" :  "src/scrollglue.js",
+  "keywords": [
+    "angular",
+    "module",
+    "scroll",
+    "glue"
+  ],
   "dependencies": {},
   "devDependencies": {
     "karma": "~0.12.0",
