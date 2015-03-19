@@ -111,7 +111,7 @@
     }
   };
 
-  var module = angular.module('luegg.directives', []);
+  var module = angular.module('scrollGlue', []);
 
   createDirective(module, 'scrollGlue', bottom);
   createDirective(module, 'scrollGlueTop', top);
