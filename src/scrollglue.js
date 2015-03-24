@@ -51,7 +51,7 @@
     }
 
     function createDirective(module, attrName, direction){
-        module.directive(attrName, ['$parse', function($parse){
+        module.directive(attrName, ['$parse', '$window', function($parse, $window){
             return {
                 priority: 1,
                 restrict: 'A',
@@ -64,6 +64,10 @@
                             direction.scroll(el);
                         }
                     });
+
+                     $window.addEventListener('resize', function() {
+                        direction.scroll(el);
+                    }, false);
 
                     $el.bind('scroll', function(){
                         activationState.setValue(direction.isAttached(el));
