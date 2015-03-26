@@ -1,7 +1,9 @@
 'use strict';
 
 describe('the scroll glue directive', function(){
-    var scope, $compile,
+    var scope,
+        $compile,
+        $window,
         templates = {
             simple: '<div style="height: 40px; overflow-y: scroll" scroll-glue><div style="height: 100px">hi {{name}}</div></div>',
             deactivated: '<div style="height: 40px; overflow-y: scroll" scroll-glue="false"><div style="height: 100px">hi {{name}}</div></div>',
@@ -12,9 +14,10 @@ describe('the scroll glue directive', function(){
 
     beforeEach(module('luegg.directives'));
 
-    beforeEach(inject(function($rootScope, _$compile_, _$timeout_){
+    beforeEach(inject(function($rootScope, _$compile_, _$window_, _$timeout_){
         scope = $rootScope;
         $compile = _$compile_;
+        $window = _$window_
     }));
 
     afterEach(function(){
@@ -141,4 +144,18 @@ describe('the scroll glue directive', function(){
 
         expect(element.scrollTop).toBe(element.scrollHeight - element.clientHeight);
     });
+
+    it('should scroll on window resize if glued', async(function(done){
+        var $element = compile(templates.simple),
+            element = $element[0];
+
+        var event = document.createEvent("HTMLEvents");
+        event.initEvent("resize", true, true);
+        $window.dispatchEvent(event);
+
+        setTimeout(function(){
+            expect(element.scrollTop).toBe(element.scrollHeight - element.clientHeight);
+            done();
+        });
+    }));
 });

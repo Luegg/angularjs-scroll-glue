@@ -59,15 +59,14 @@
                     var el = $el[0],
                         activationState = createActivationState($parse, attrs[attrName], scope);
 
-                    scope.$watch(function(){
+                    function scrollIfGlued() {
                         if(activationState.getValue() && !direction.isAttached(el)){
                             direction.scroll(el);
                         }
-                    });
+                    }
 
-                     $window.addEventListener('resize', function() {
-                        direction.scroll(el);
-                    }, false);
+                    scope.$watch(scrollIfGlued);
+                    $window.addEventListener('resize', scrollIfGlued, false);
 
                     $el.bind('scroll', function(){
                         activationState.setValue(direction.isAttached(el));
