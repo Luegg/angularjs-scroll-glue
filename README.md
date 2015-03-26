@@ -37,6 +37,14 @@ angular.module('yourModule', [
 ## Live demo
 [Demo Plunk](http://plnkr.co/edit/wxTyp7PpyxJOHSlUumVC?p=preview)
 
+## Contribute
+
+Despite this is a ultra specialized library, there will always be a fix to be made or a new feature to be added and I'm glad for any contributions. But please make sure to check the following before committing a pull request:
+
+1. Make sure the unit tests pass. Just run `npm test` and check if all is green.
+1. Try to add new tests that cover your changes.
+1. Make sure you do not introduce changes that break backward compatibility unless there is a really good reason to.
+
 ## License (MIT)
 
 Copyright (C) 2013 Luegg
