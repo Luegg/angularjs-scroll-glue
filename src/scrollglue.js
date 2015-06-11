@@ -51,7 +51,7 @@
     }
 
     function createDirective(module, attrName, direction){
-        module.directive(attrName, ['$parse', '$window', function($parse, $window, $timeout){
+        module.directive(attrName, ['$parse', '$window', '$timeout', function($parse, $window, $timeout){
             return {
                 priority: 1,
                 restrict: 'A',
