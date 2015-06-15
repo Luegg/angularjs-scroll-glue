@@ -21,14 +21,12 @@ $ npm install --save ng-scroll-glue
 ```
 
 ## Usage
-
 1. Insert the script into your HTML:
 	```html
 	...
 	<script src="/components/ng-scroll-glue/dist/scrollglue.js"></script>
 	...
 	```
-
 	Or the minified version for production:
 	```html
 	...
@@ -38,9 +36,9 @@ $ npm install --save ng-scroll-glue
 
 2. Import the directive into your Angular app:
 	```javascript
-	// Add `luegg.directives` to your module's dependencies.
+	// Add `ngScrollGlue` to your module's dependencies.
 	angular.module('yourModule', [
-		...,
+		//...
 		'ngScrollGlue'
 	]);
 	```
