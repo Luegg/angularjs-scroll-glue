@@ -7,17 +7,17 @@ This is a fork of [Lukas Wegmann's Angular Scroll Glue](https://github.com/Luegg
 
 If you're switching from Lukas' version you must change the directive name from `luegg.directives` to `ngScrollGlue`.
 
-There's also a minified version available on the `dist` folder.
+There's also a minified version available in the `dist` folder.
 
 ## Install
 ### Bower
 ```bash
-$ bower install angular-scroll-glue --save
+$ bower install ng-scroll-glue --save
 ```
 
 ### npm
 ```bash
-$ npm i angularjs-scroll-glue
+$ npm i ng-scroll-glue
 ```
 
 ## Usage
