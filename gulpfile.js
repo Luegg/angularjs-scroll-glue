@@ -1,33 +1,61 @@
-var gulp = require('gulp');
-var uglify = require('gulp-uglify');
+'use strict';
+
 var sourcemaps = require('gulp-sourcemaps');
+var rename = require('gulp-rename');
+var uglify = require('gulp-uglify');
+var gulp = require('gulp');
 var del = require('del');
 
 var paths = {
-  scripts: ['src/**/*.js']
+  scripts: 'src/*.js'
 };
 
-// Not all tasks need to use streams
-// A gulpfile is just another node program and you can use all packages available on npm
-gulp.task('clean', function(cb) {
-  // You can use multiple globbing patterns as you would with `gulp.src`
-  del(['dist'], cb);
+/**
+ * Clean the dist folder.
+ */
+gulp.task('clean', function (next) {
+  del('dist', next);
 });
 
-gulp.task('scripts', ['clean'], function() {
-  // Minify and copy all JavaScript (except vendor scripts)
-  // with sourcemaps all the way down
-  return gulp.src(paths.scripts)
-    .pipe(sourcemaps.init())
-    .pipe(uglify())
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('dist/js'));
+/**
+ * Minify and copy to dist folder.
+ */
+gulp.task('minify', ['clean'], function () {
+  return gulp.src(paths.scripts).
+  pipe(sourcemaps.init()).
+  pipe(uglify()).
+  pipe(sourcemaps.write()).
+  pipe(rename({
+    extname: '.min.js'
+  })).
+  pipe(gulp.dest('dist/'));
 });
 
-// Rerun the task when a file changes
-gulp.task('watch', function() {
-  gulp.watch(paths.scripts, ['scripts']);
+/**
+ * Beautify and copy to dist folder.
+ */
+gulp.task('beautify', ['minify'], function () {
+  return gulp.src(paths.scripts).
+  pipe(uglify({
+    mangle: false,
+    compress: false,
+    output: {
+      bracketize: true,
+      indent_level: 2,
+      beautify: true
+    }
+  })).
+  pipe(gulp.dest('dist/'));
+});
+
+gulp.task('build', ['beautify']);
+
+/**
+ * Watch for file changes.
+ */
+gulp.task('watch', function () {
+  gulp.watch(paths.scripts, ['build']);
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['scripts']);
+gulp.task('default', ['clean', 'build']);
