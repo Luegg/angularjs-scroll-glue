@@ -28,24 +28,24 @@
       }
     </style>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>
     <script src="src/scrollglue.js"></script>
     
     <script>
-      angular.module('demo', ['luegg.directives']);
-    
-      function ItemsCtrl($scope, $timeout){
-        $scope.items = ['1', '2', '3'];
-        var counter = $scope.items.slice(-1)[0];
-        $scope.glued = true;
-        
-        function addItem(){
-          $scope.items.push(++counter);
-          $timeout(addItem, 5000);
-        }
-        
-        $timeout(addItem, 1000);
-      }
+      angular
+        .module('demo', ['luegg.directives'])
+        .controller('ItemsCtrl', function ItemsCtrl($scope, $timeout){
+          $scope.items = ['1', '2', '3'];
+          var counter = $scope.items.slice(-1)[0];
+          $scope.glued = true;
+          
+          function addItem(){
+            $scope.items.push(++counter);
+            $timeout(addItem, 1000);
+          }
+          
+          $timeout(addItem, 1000);
+        });
     </script>
   </head>
   
