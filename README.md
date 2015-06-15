@@ -28,11 +28,11 @@ $ npm i angularjs-scroll-glue
 1. Insert the script into your HTML:
 	```html
 	...
-	<script src="/components/ng-scroll-glue/src/scrollglue.js"></script>
+	<script src="/components/ng-scroll-glue/dist/scrollglue.js"></script>
 	...
 	```
 
-	Or the minified version:
+	Or the minified version for production:
 	```html
 	...
 	<script src="/components/ng-scroll-glue/dist/scrollglue.min.js"></script>
