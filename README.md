@@ -15,21 +15,28 @@ $ npm i angularjs-scroll-glue
 
 ## Usage
 
-First, import the directive into your Angular app:
-```javascript
-// Add `luegg.directives` to your module's dependencies.
-angular.module('yourModule', [
-	...,
-	'luegg.directives'
-]);
-```
+1. Insert the script into your HTML:
+	```html
+	...
+	<script src="/components/angular-scroll-glue/src/scrollglue.js"></script>
+	...
+	```
 
-Then, add the directive to your html:
-```html
-<div scroll-glue>
-	<!-- Content here will be "scroll-glued" -->
-</div>
-```
+2. Import the directive into your Angular app:
+	```javascript
+	// Add `luegg.directives` to your module's dependencies.
+	angular.module('yourModule', [
+		...,
+		'luegg.directives'
+	]);
+	```
+
+3. Add the directive to your html:
+	```html
+	<div scroll-glue>
+		<!-- Content here will be "scroll-glued" -->
+	</div>
+	```
 
 The `scroll-glue`attribute glues the content to the bottom by default. You can set other directions with the attribute name, like `scroll-glue-bottom`, `scroll-glue-top`, `scroll-glue-left` or `scroll-glue-right`.
 
