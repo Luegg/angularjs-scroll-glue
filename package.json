@@ -1,8 +1,8 @@
 {
-  "author": "Lukas Wegmann",
-  "name": "angularjs-scroll-glue",
-  "version": "2.0.6",
-  "main" :  "src/scrollglue.js",
+  "author": "Santiago G. Marín",
+  "name": "ng-scroll-glue",
+  "version": "2.0.6b",
+  "main" :  "dist/scrollglue.min.js",
   "keywords": [
     "angular",
     "module",
