@@ -12,12 +12,12 @@ There's also a minified version available in the `dist` folder.
 ## Install
 ### Bower
 ```bash
-$ bower install ng-scroll-glue --save
+$ bower install --save ng-scroll-glue
 ```
 
 ### npm
 ```bash
-$ npm install ng-scroll-glue
+$ npm install --save ng-scroll-glue
 ```
 
 ## Usage
