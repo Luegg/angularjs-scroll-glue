@@ -1,6 +1,16 @@
-# angular-scroll-glue [![Build Status](https://travis-ci.org/Luegg/angularjs-scroll-glue.svg?branch=master)](https://travis-ci.org/Luegg/angularjs-scroll-glue)
+# angular-scroll-glue [![Build Status](https://travis-ci.org/stgogm/ng-scroll-glue.svg?branch=master)](https://travis-ci.org/stgogm/ng-scroll-glue)
 
 An AngularJs directive that automatically scrolls to the bottom of an element on changes in its scope.
+
+---------------------------
+
+**IMPORTANT**: This is a fork of (Lukas Wegmann's Angular Scroll Glue)[https://github.com/Luegg/angularjs-scroll-glue]. I haven't touched the module's functionality, only the module's name.
+
+If you're switching from Lukas' version you must change the directive name from ´luegg.directives´ to ´ngScrollGlue´.
+
+There's also a minified version available on the ´dist´ folder.
+
+---------------------------
 
 ## Install
 ### Bower
@@ -18,7 +28,14 @@ $ npm i angularjs-scroll-glue
 1. Insert the script into your HTML:
 	```html
 	...
-	<script src="/components/angular-scroll-glue/src/scrollglue.js"></script>
+	<script src="/components/ng-scroll-glue/src/scrollglue.js"></script>
+	...
+	```
+
+	Or the minified version:
+	```html
+	...
+	<script src="/components/ng-scroll-glue/dist/scrollglue.min.js"></script>
 	...
 	```
 
@@ -27,7 +44,7 @@ $ npm i angularjs-scroll-glue
 	// Add `luegg.directives` to your module's dependencies.
 	angular.module('yourModule', [
 		...,
-		'luegg.directives'
+		'ngScrollGlue'
 	]);
 	```
 
@@ -51,19 +68,3 @@ $scope.glued = true;
 	<!-- Content here will start and will be "scroll-glued" -->
 </div>
 ```
-
-
-**More information can be found in the [live demo](#live-demo).**
-
-## Live demo
-[Demo Plunk](http://plnkr.co/edit/wxTyp7PpyxJOHSlUumVC?p=preview)
-
-## License (MIT)
-
-Copyright (C) 2013 Luegg
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
