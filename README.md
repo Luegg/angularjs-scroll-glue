@@ -63,3 +63,6 @@ $scope.glued = true;
 	<!-- Content here will start and will be "scroll-glued" -->
 </div>
 ```
+
+## Example
+[Visit example page](https://rawgit.com/stgogm/ng-scroll-gluer/master/example/index.html)
