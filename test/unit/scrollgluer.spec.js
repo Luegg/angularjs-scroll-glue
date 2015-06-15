@@ -12,7 +12,7 @@ describe('the scroll glue directive', function () {
       withBindingTop: '<div style="height: 40px; overflow-y: scroll" scroll-glue="glued"><div style="height: 100px">hi {{name}}</div></div>',
     };
 
-  beforeEach(module('ngScrollGlue'));
+  beforeEach(module('ngScrollGluer'));
 
   beforeEach(inject(function ($rootScope, _$compile_, _$window_, _$timeout_) {
     scope = $rootScope;

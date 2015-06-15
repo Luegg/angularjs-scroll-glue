@@ -12,34 +12,34 @@ There's also a minified version available in the `dist` folder.
 ## Install
 ### Bower
 ```bash
-$ bower install --save ng-scroll-glue
+$ bower install --save ng-scroll-gluer
 ```
 
 ### npm
 ```bash
-$ npm install --save ng-scroll-glue
+$ npm install --save ng-scroll-gluer
 ```
 
 ## Usage
 1. Insert the script into your HTML:
 	```html
 	...
-	<script src="/components/ng-scroll-glue/dist/scrollglue.js"></script>
+	<script src="/components/ng-scroll-glue/dist/scrollgluer.js"></script>
 	...
 	```
 	Or the minified version for production:
 	```html
 	...
-	<script src="/components/ng-scroll-glue/dist/scrollglue.min.js"></script>
+	<script src="/components/ng-scroll-glue/dist/scrollgluer.min.js"></script>
 	...
 	```
 
 2. Import the directive into your Angular app:
 	```javascript
-	// Add `ngScrollGlue` to your module's dependencies.
-	angular.module('yourModule', [
+	/* Add `ngScrollGluer` to your module's dependencies */
+	angular.module('App', [
 		//...
-		'ngScrollGlue'
+		'ngScrollGluer'
 	]);
 	```
 

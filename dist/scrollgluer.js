@@ -100,7 +100,7 @@
       el.scrollLeft = 0;
     }
   };
-  var module = angular.module("ngScrollGlue", []);
+  var module = angular.module("ngScrollGluer", []);
   createDirective(module, "scrollGlue", bottom);
   createDirective(module, "scrollGlueTop", top);
   createDirective(module, "scrollGlueBottom", bottom);

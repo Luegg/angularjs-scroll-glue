@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('example', [
-    'ngScrollGlue'
+    'ngScrollGluer'
   ]).
 
   controller('ItemsCtrl', [

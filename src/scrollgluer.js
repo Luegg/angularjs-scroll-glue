@@ -1,5 +1,5 @@
 /**
- * @name Angular Scroll Glue
+ * @name Angular Scroll Gluer
  * @type Angular JS Module
  * @version 2.0.6
  * @author Santiago G. Marín <santiago@finaldevstudio.com>
@@ -7,7 +7,7 @@
  *   of an element on changes in it's scope. This is a fork of Lukas Wegmann's
  *   Angular Scroll Glue (https://github.com/Luegg/angularjs-scroll-glue).
  * @license MIT
- * @see https://github.com/stgogm/ng-scroll-glue.git
+ * @see https://github.com/stgogm/ng-scroll-gluer
  */
 
 (function (angular) {
@@ -141,7 +141,7 @@
     }
   };
 
-  var module = angular.module('ngScrollGlue', []);
+  var module = angular.module('ngScrollGluer', []);
 
   createDirective(module, 'scrollGlue', bottom);
   createDirective(module, 'scrollGlueTop', top);
