@@ -4,11 +4,11 @@ An AngularJs directive that automatically scrolls to the bottom of an element on
 
 ---------------------------
 
-**IMPORTANT**: This is a fork of [Lukas Wegmann's Angular Scroll Glue}(https://github.com/Luegg/angularjs-scroll-glue). I haven't touched the module's functionality, only the module's name.
+**IMPORTANT**: This is a fork of [Lukas Wegmann's Angular Scroll Glue](https://github.com/Luegg/angularjs-scroll-glue). I haven't touched the module's functionality, only the module's name.
 
-If you're switching from Lukas' version you must change the directive name from ´luegg.directives´ to ´ngScrollGlue´.
+If you're switching from Lukas' version you must change the directive name from `luegg.directives` to `ngScrollGlue`.
 
-There's also a minified version available on the ´dist´ folder.
+There's also a minified version available on the `dist` folder.
 
 ---------------------------
 
