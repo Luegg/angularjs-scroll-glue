@@ -17,7 +17,7 @@ $ bower install ng-scroll-glue --save
 
 ### npm
 ```bash
-$ npm i ng-scroll-glue
+$ npm install ng-scroll-glue
 ```
 
 ## Usage
