@@ -14,6 +14,8 @@ $ npm i angularjs-scroll-glue
 ```
 
 ## Usage
+
+First, import the directive into your Angular app:
 ```javascript
 // Add `luegg.directives` to your module's dependencies.
 angular.module('yourModule', [
@@ -22,28 +24,32 @@ angular.module('yourModule', [
 ]);
 ```
 
+Then, add the directive to your html:
 ```html
 <div scroll-glue>
-	<!-- Content here will be "scroll-glued". -->
-</div>
-
-<div scroll-glue="glued">
-	<!-- Content here will be "scroll-glued" if the passed expression is truthy. -->
+	<!-- Content here will be "scroll-glued" -->
 </div>
 ```
+
+The `scroll-glue`attribute glues the content to the bottom by default. You can set other directions with the attribute name, like `scroll-glue-bottom`, `scroll-glue-top`, `scroll-glue-left` or `scroll-glue-right`.
+
+If you assign a variable name to the `scroll-glue` attribute that is present in the scope and it's true, it'll start glued to the glue direction defined in the attribute name:
+```javascript
+// ...
+$scope.glued = true;
+// ...
+```
+```html
+<div scroll-glue="glued">
+	<!-- Content here will start and will be "scroll-glued" -->
+</div>
+```
+
 
 **More information can be found in the [live demo](#live-demo).**
 
 ## Live demo
 [Demo Plunk](http://plnkr.co/edit/wxTyp7PpyxJOHSlUumVC?p=preview)
-
-## Contribute
-
-Despite this is a ultra specialized library, there will always be a fix to be made or a new feature to be added and I'm glad for any contributions. But please make sure to check the following before committing a pull request:
-
-1. Make sure the unit tests pass. Just run `npm test` and check if all is green.
-1. Try to add new tests that cover your changes.
-1. Make sure you do not introduce changes that break backward compatibility unless there is a really good reason to.
 
 ## License (MIT)
 
