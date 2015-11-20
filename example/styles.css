@@ -1,0 +1,15 @@
+textarea[scroll-glue],
+textarea[scroll-glue-top],
+textarea[scroll-glue-bottom] {
+  overflow-y: scroll;
+}
+
+textarea[scroll-glue-left],
+textarea[scroll-glue-right]  {
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+
+.nav-pills.affix {
+  top: 30px;
+}

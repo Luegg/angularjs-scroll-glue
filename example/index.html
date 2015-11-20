@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="utf-8">
+  <title>AngularJS Scroll Glue Directive</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/stgogm/ng-scroll-gluer/master/example/styles.css" media="screen" title="no title" charset="utf-8">
+</head>
+
+<body ng-app="example" ng-controller="ItemsCtrl">
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Angular Scroll Glue Examples</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <ul class="nav nav-pills nav-stacked">
+          <li>
+            <a href="#simple">Simple</a>
+          </li>
+          <li>
+            <a href="#with-two-way-data-binding">With two-way data binding</a>
+          </li>
+          <li>
+            <a href="#with-one-way-data-binding">With one-way data binding</a>
+          </li>
+          <li>
+            <a href="#scroll-direction">Scroll Direction</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm-8">
+        <h2 id="simple">Simple</h2>
+        <p>To activate the scroll glue on an element just add the scroll-glue attribute.</p>
+        <pre>&lt;textarea &hellip; scroll-glue&gt;&hellip;&lt;/textarea&gt;</pre>
+        <div class="form-group">
+          <textarea class="form-control" rows="5" scroll-glue>{{ items.join('\n') }}</textarea>
+        </div>
+
+        <hr>
+
+        <h2 id="with-two-way-data-binding">With two-way data binding</h2>
+        <p>If you pass a scope variable to the attribute, scroll-glue updates the variable to true when the glue is attached or to false if the glue is released and activates/deactivates the glue according to the variables value.</p>
+        <pre>&lt;textarea &hellip; scroll-glue="glued"&gt;&hellip;&lt;/textarea&gt;</pre>
+        <div class="form-group">
+          <textarea class="form-control" rows="5" scroll-glue="glued">{{ items.join('\n') }}</textarea>
+        </div>
+        <p>
+          <button class="btn btn-primary" ng-click="glued = !glued">Toggle glued</button>
+          <strong>Glued:</strong> {{glued}}
+        </p>
+
+        <hr>
+
+        <h2 id="with-one-way-data-binding">With one-way data binding</h2>
+        <p>If you pass an expression that is not a scope variable, the scroll-glue is bound to the result of this expression.</p>
+
+        <pre>&lt;textarea &hellip; scroll-glue="!empty"&gt;&hellip;&lt;/textarea&gt;</pre>
+        <div class="form-group">
+          <textarea class="form-control" rows="5" scroll-glue="!empty">{{ items.join('\n') }}</textarea>
+        </div>
+
+        <p>If you want to force one way-binding on a scope variable use double negation:</p>
+
+        <pre>&lt;textarea &hellip; scroll-glue="!!empty"&gt;&hellip;&lt;/textarea&gt;</pre>
+        <div class="form-group">
+          <textarea class="form-control" rows="5" scroll-glue="!!empty">{{ items.join('\n') }}</textarea>
+        </div>
+
+        <hr>
+
+        <h2 id ="scroll-direction">Scroll Direction</h2>
+        <p>You can also specify the scroll direction by combining the following directives:</p>
+
+        <h4>Top</h4>
+        <pre>&lt;textarea &hellip; scroll-glue-top="glued"&gt;&hellip;&lt;/textarea&gt;</pre>
+        <div class="form-group">
+          <textarea class="form-control" rows="5" scroll-glue-top="glued">{{ items.join('\n') }}</textarea>
+        </div>
+
+        <h4>Bottom</h4>
+        <pre>&lt;textarea &hellip; scroll-glue-bottom="glued"&gt;&hellip;&lt;/textarea&gt;</pre>
+        <div class="form-group">
+          <textarea class="form-control" rows="5" scroll-glue-bottom="glued">{{ items.join('\n') }}</textarea>
+        </div>
+
+        <h4>Left</h4>
+        <pre>&lt;textarea &hellip; scroll-glue-left="glued"&gt;&hellip;&lt;/textarea&gt;</pre>
+        <div class="form-group">
+          <textarea class="form-control" rows="1" scroll-glue-left="glued">{{ items.join(' -- ') }}</textarea>
+        </div>
+
+        <h4>Right</h4>
+        <pre>&lt;textarea &hellip; scroll-glue-right="glued"&gt;&hellip;&lt;/textarea&gt;</pre>
+        <div class="form-group">
+          <textarea class="form-control" rows="1" scroll-glue-right="glued">{{ items.join(' -- ') }}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>
+  <script src="https:///cdn.rawgit.com/stgogm/ng-scroll-gluer/master/dist/scrollgluer.min.js"></script>
+  <script src="https:///cdn.rawgit.com/stgogm/ng-scroll-gluer/master/example/scripts.js"></script>
+</body>
+
+</html>
