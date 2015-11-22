@@ -71,14 +71,26 @@
                         }
                     }
 
+                    function onScroll() {
+                        activationState.setValue(direction.isAttached(el));
+                    }
+
                     scope.$watch(scrollIfGlued);
-                    
+
                     $timeout(scrollIfGlued, 0, false);
-                    
+
                     $window.addEventListener('resize', scrollIfGlued, false);
 
-                    $el.bind('scroll', function(){
-                        activationState.setValue(direction.isAttached(el));
+                    $el.bind('scroll', onScroll);
+
+
+                    // Remove listeners on directive destroy
+                    $el.on('$destroy', function() {
+                        $el.unbind('scroll', onScroll);
+                    });
+
+                    scope.$on('$destroy', function() {
+                        $window.removeEventListener('resize',scrollIfGlued, false);
                     });
                 }
             };
