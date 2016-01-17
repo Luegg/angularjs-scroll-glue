@@ -64,11 +64,13 @@
                 link: function(scope, $el, attrs){
                     var el = $el[0],
                         activationState = createActivationState($parse, attrs[attrName], scope);
-
+                        
                     function scrollIfGlued() {
-                        if(activationState.getValue() && !direction.isAttached(el)){
-                            direction.scroll(el);
-                        }
+                        $timeout(function(){
+                            if(activationState.getValue() && !direction.isAttached(el) ){
+                                direction.scroll(el);
+                            }
+                        },0,false);
                     }
 
                     function onScroll() {
@@ -77,12 +79,13 @@
 
                     scope.$watch(scrollIfGlued);
 
-                    $timeout(scrollIfGlued, 0, false);
+                    scrollIfGlued();
 
                     $window.addEventListener('resize', scrollIfGlued, false);
 
-                    $el.bind('scroll', onScroll);
-
+                    $el.on('scroll', function(){
+                        $timeout(onScroll, 0, false);
+                    });
 
                     // Remove listeners on directive destroy
                     $el.on('$destroy', function() {
