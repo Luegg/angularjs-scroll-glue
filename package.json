@@ -2,7 +2,7 @@
   "name": "angularjs-scroll-glue",
   "version": "2.0.6",
   "description": "An AngularJs directive that automatically scrolls to the bottom of an element on changes in it's scope.",
-  "main" :  "src/scrollglue.js",
+  "main": "src/scrollglue.js",
   "scripts": {
     "test": "./node_modules/.bin/karma start --browsers Firefox --single-run"
   },
@@ -22,9 +22,11 @@
   ],
   "dependencies": {},
   "devDependencies": {
+    "jasmine-core": "~2.4.1",
     "karma": "~0.13.22",
-    "karma-jasmine": "~1.0.2",
     "karma-firefox-launcher": "~1.0.0",
-    "karma-phantomjs-launcher": "~1.0.0"
+    "karma-jasmine": "~1.0.2",
+    "karma-phantomjs-launcher": "~1.0.0",
+    "phantomjs-prebuilt": "~2.1.7"
   }
 }

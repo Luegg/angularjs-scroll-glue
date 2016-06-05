@@ -48,7 +48,7 @@ describe('the scroll glue directive', function(){
         expect(element.scrollTop).toBe(0);
     });
 
-    it('should turn off auto scroll after user scrolled manually', async(function(done){
+    it('should turn off auto scroll after user scrolled manually', function(done){
         var $element = compile(templates.simple),
             element = $element[0];
 
@@ -63,9 +63,9 @@ describe('the scroll glue directive', function(){
 
             done();
         }, 10);
-    }));
+    });
 
-    it('should turn on auto scroll after user scrolled manually to bottom of element', async(function(done){
+    it('should turn on auto scroll after user scrolled manually to bottom of element', function(done){
         var $element = compile(templates.simple),
             element = $element[0];
 
@@ -85,7 +85,7 @@ describe('the scroll glue directive', function(){
                 done();
             });
         });
-    }));
+    });
 
     it('should turn off when the bound value is false', function(){
         scope.glued = true;
@@ -99,7 +99,7 @@ describe('the scroll glue directive', function(){
         expect(element.scrollTop).toBe(0);
     });
 
-    it('should update the bound value', async(function(done){
+    it('should update the bound value', function(done){
         scope.glued = true;
 
         var $element = compile(templates.withBinding),
@@ -113,9 +113,9 @@ describe('the scroll glue directive', function(){
             expect(scope.glued).toBe(false);
             done();
         });
-    }));
+    });
 
-    it('should update the bound value in sub properties', async(function(done){
+    it('should update the bound value in sub properties', function(done){
         scope.prop = {
             glued: true
         };
@@ -131,7 +131,7 @@ describe('the scroll glue directive', function(){
             expect(scope.prop.glued).toBe(false);
             done();
         });
-    }));
+    });
 
     it('should scroll to top when using scroll-glue-top', function(){
         var $element = compile(templates.withBindingTop),
@@ -145,7 +145,7 @@ describe('the scroll glue directive', function(){
         expect(element.scrollTop).toBe(element.scrollHeight - element.clientHeight);
     });
 
-    it('should scroll on window resize if glued', async(function(done){
+    it('should scroll on window resize if glued', function(done){
         var $element = compile(templates.simple),
             element = $element[0];
 
@@ -157,5 +157,5 @@ describe('the scroll glue directive', function(){
             expect(element.scrollTop).toBe(element.scrollHeight - element.clientHeight);
             done();
         });
-    }));
+    });
 });
