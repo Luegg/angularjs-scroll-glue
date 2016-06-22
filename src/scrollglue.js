@@ -4,6 +4,11 @@
  * An AngularJs directive that automatically scrolls to the bottom of an element on changes in it's scope.
 */
 
+// Allow module to be loaded via require when using common js. e.g. npm
+if(typeof module === "object" && module.exports){
+    module.exports = 'luegg.directives';
+}
+
 (function(angular, undefined){
     'use strict';
 
