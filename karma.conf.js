@@ -15,7 +15,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js',
       'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js',
       'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-mocks.js',
       'src/*.js',
@@ -25,14 +24,14 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      
+
     ],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-    
+
     },
 
 
