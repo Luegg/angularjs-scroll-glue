@@ -1,5 +1,5 @@
 /* angularjs Scroll Glue
- * version 2.0.6
+ * version 2.0.7
  * https://github.com/Luegg/angularjs-scroll-glue
  * An AngularJs directive that automatically scrolls to the bottom of an element on changes in it's scope.
 */
@@ -31,7 +31,7 @@ if(typeof module === "object" && module.exports){
                     return getter(scope);
                 },
                 setValue: function(){}
-            }
+            };
         }
 
         function twoWayBindingState(getter, setter, scope){
@@ -86,7 +86,7 @@ if(typeof module === "object" && module.exports){
 
                     $window.addEventListener('resize', scrollIfGlued, false);
 
-                    $el.bind('scroll', onScroll);
+                    $el.on('scroll', onScroll);
 
 
                     // Remove listeners on directive destroy
@@ -95,7 +95,7 @@ if(typeof module === "object" && module.exports){
                     });
 
                     scope.$on('$destroy', function() {
-                        $window.removeEventListener('resize',scrollIfGlued, false);
+                        $window.removeEventListener('resize', scrollIfGlued, false);
                     });
                 }
             };
