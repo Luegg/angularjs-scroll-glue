@@ -4,20 +4,22 @@ describe('the scroll glue directive', function(){
     var scope,
         $compile,
         $window,
+        $document,
         templates = {
             simple: '<div style="height: 40px; overflow-y: scroll" scroll-glue><div style="height: 100px">hi {{name}}</div></div>',
             deactivated: '<div style="height: 40px; overflow-y: scroll" scroll-glue="false"><div style="height: 100px">hi {{name}}</div></div>',
             withBinding: '<div style="height: 40px; overflow-y: scroll" scroll-glue="glued"><div style="height: 100px">hi {{name}}</div></div>',
             withSubPropertyBinding: '<div style="height: 40px; overflow-y: scroll" scroll-glue="prop.glued"><div style="height: 100px">hi {{name}}</div></div>',
-            withBindingTop: '<div style="height: 40px; overflow-y: scroll" scroll-glue="glued"><div style="height: 100px">hi {{name}}</div></div>',
+            withBindingTop: '<div style="height: 40px; overflow-y: scroll" scroll-glue-top="glued"><div style="height: 100px">hi {{name}}</div></div>',
         };
 
     beforeEach(module('luegg.directives'));
 
-    beforeEach(inject(function($rootScope, _$compile_, _$window_, _$timeout_){
+    beforeEach(inject(function($rootScope, _$compile_, _$window_, _$document_){
         scope = $rootScope;
         $compile = _$compile_;
         $window = _$window_
+        $document = _$document_;
     }));
 
     afterEach(function(){
@@ -25,12 +27,14 @@ describe('the scroll glue directive', function(){
     });
 
     function compile(template){
-        return $compile($(template))(scope).appendTo($('body'));
+        var directiveElement = $compile(template)(scope);
+        var bodyElement = angular.element($document[0].body);
+        bodyElement.append(directiveElement);
+        return directiveElement[0];
     }
 
     it('should scroll to bottom of element on changes', function(){
-        var $element = compile(templates.simple),
-            element = $element[0];
+        var element = compile(templates.simple);
 
         scope.name = "World";
         scope.$digest();
@@ -39,8 +43,7 @@ describe('the scroll glue directive', function(){
     });
 
     it('should be deactivated if the scrollGlue attribute is set to "false"', function(){
-        var $element = compile(templates.deactivated),
-            element = $element[0];
+        var element = compile(templates.deactivated);
 
         scope.name = "World";
         scope.$digest();
@@ -49,8 +52,7 @@ describe('the scroll glue directive', function(){
     });
 
     it('should turn off auto scroll after user scrolled manually', function(done){
-        var $element = compile(templates.simple),
-            element = $element[0];
+        var element = compile(templates.simple);
 
         scope.$digest();
         element.scrollTop = 0;
@@ -66,8 +68,7 @@ describe('the scroll glue directive', function(){
     });
 
     it('should turn on auto scroll after user scrolled manually to bottom of element', function(done){
-        var $element = compile(templates.simple),
-            element = $element[0];
+        var element = compile(templates.simple);
 
         scope.$digest();
         element.scrollTop = 0;
@@ -90,8 +91,7 @@ describe('the scroll glue directive', function(){
     it('should turn off when the bound value is false', function(){
         scope.glued = true;
 
-        var $element = compile(templates.withBinding),
-            element = $element[0];
+        var element = compile(templates.withBinding);
 
         scope.glued = false;
         scope.$digest();
@@ -102,8 +102,7 @@ describe('the scroll glue directive', function(){
     it('should update the bound value', function(done){
         scope.glued = true;
 
-        var $element = compile(templates.withBinding),
-            element = $element[0];
+        var element = compile(templates.withBinding);
 
         scope.$digest();
 
@@ -120,8 +119,7 @@ describe('the scroll glue directive', function(){
             glued: true
         };
 
-        var $element = compile(templates.withSubPropertyBinding),
-            element = $element[0];
+        var element = compile(templates.withSubPropertyBinding);
 
         scope.$digest();
 
@@ -134,8 +132,7 @@ describe('the scroll glue directive', function(){
     });
 
     it('should scroll to top when using scroll-glue-top', function(){
-        var $element = compile(templates.withBindingTop),
-            element = $element[0];
+        var element = compile(templates.withBindingTop);
 
         element.scrollTop = 100;
 
@@ -146,8 +143,7 @@ describe('the scroll glue directive', function(){
     });
 
     it('should scroll on window resize if glued', function(done){
-        var $element = compile(templates.simple),
-            element = $element[0];
+        var element = compile(templates.simple);
 
         var event = document.createEvent("HTMLEvents");
         event.initEvent("resize", true, true);
