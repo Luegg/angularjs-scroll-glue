@@ -73,6 +73,8 @@ if(typeof module === "object" && module.exports){
                     function scrollIfGlued() {
                         if(activationState.getValue() && !direction.isAttached(el)){
                             direction.scroll(el);
+							// Ensures scroll after angular template digest
+                            $timeout(() => direction.scroll(el));
                         }
                     }
 
