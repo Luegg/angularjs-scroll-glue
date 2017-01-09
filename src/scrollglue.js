@@ -72,7 +72,10 @@ if(typeof module === "object" && module.exports){
 
                     function scrollIfGlued() {
                         if(activationState.getValue() && !direction.isAttached(el)){
-                            direction.scroll(el);
+                            // Ensures scroll after angular template digest
+                            $timeout(function() {
+                              direction.scroll(el);
+                            });
                         }
                     }
 
@@ -80,14 +83,26 @@ if(typeof module === "object" && module.exports){
                         activationState.setValue(direction.isAttached(el));
                     }
 
-                    scope.$watch(scrollIfGlued);
-
                     $timeout(scrollIfGlued, 0, false);
 
-                    $window.addEventListener('resize', scrollIfGlued, false);
+                    if (!$el[0].hasAttribute('force-glue')) {
+                      $el.on('scroll', onScroll);
+                    }
 
-                    $el.on('scroll', onScroll);
+                    var hasAnchor = false;
+                    angular.forEach($el.children(), function(child) {
+                      if (child.hasAttribute('scroll-glue-anchor')) {
+                        hasAnchor = true;
+                        scope.$watch(function() { return child.offsetHeight }, function() {
+                          scrollIfGlued();
+                        });
+                      }
+                    });
 
+                    if (!hasAnchor) {
+                      scope.$watch(scrollIfGlued);
+                      $window.addEventListener('resize', scrollIfGlued, false);
+                    }
 
                     // Remove listeners on directive destroy
                     $el.on('$destroy', function() {
