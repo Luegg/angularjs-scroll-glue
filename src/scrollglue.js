@@ -74,7 +74,9 @@ if(typeof module === "object" && module.exports){
                         if(activationState.getValue() && !direction.isAttached(el)){
                             direction.scroll(el);
 							// Ensures scroll after angular template digest
-                            $timeout(() => direction.scroll(el));
+                            $timeout(function() { 
+								direction.scroll(el) 
+							});
                         }
                     }
 
