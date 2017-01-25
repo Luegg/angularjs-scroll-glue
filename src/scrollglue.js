@@ -94,7 +94,7 @@ if(typeof module === "object" && module.exports){
                     angular.forEach($el.children(), function(child) {
                       if (child.hasAttribute('scroll-glue-anchor')) {
                         hasAnchor = true;
-                        scope.$watch(function() { child.offsetHeight }, function() {
+                        scope.$watch(function() { return child.offsetHeight }, function() {
                           scrollIfGlued();
                         });
                       }
