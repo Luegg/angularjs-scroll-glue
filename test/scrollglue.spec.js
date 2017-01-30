@@ -15,10 +15,16 @@ describe('the scroll glue directive', function(){
 
     beforeEach(module('luegg.directives'));
 
+    beforeEach(module(function($provide) {
+        $provide.value('$timeout', function(paramFct) {
+            paramFct();
+        });
+    }));
+
     beforeEach(inject(function($rootScope, _$compile_, _$window_, _$document_){
         scope = $rootScope;
         $compile = _$compile_;
-        $window = _$window_
+        $window = _$window_;
         $document = _$document_;
     }));
 

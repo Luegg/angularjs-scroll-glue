@@ -30,6 +30,16 @@ angular.module('yourModule', [
 <div scroll-glue="glued">
 	<!-- Content here will be "scroll-glued" if the passed expression is truthy. -->
 </div>
+
+<div scroll-glue force-glue>
+	<!-- Content here will be "scroll-glued" even if user manually scroll top. -->
+</div>
+
+<div class="parent" scroll-glue>
+    <div class="child1" scroll-glue-anchor></div>
+    <div class="child2" scroll-glue-anchor></div>
+	<!-- Parent here will be "scroll-glued" according to the child1 and child2 size change event -->
+</div>
 ```
 
 **More information can be found in the [live demo](#live-demo).**
