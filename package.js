@@ -2,7 +2,7 @@ Package.describe({
     name: "luegg:angularjs-scroll-glue",
     summary: "Scrolls to the bottom of an element on changes",
     description: "An AngularJs directive that automatically scrolls to the bottom of an element on changes in it's scope.",
-    version: "2.1.0",
+    version: "2.2.0",
     git: "https://github.com/Luegg/angularjs-scroll-glue.git"
 });
 
